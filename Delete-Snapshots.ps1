@@ -3,6 +3,14 @@
 ===============================================================================
 Title       : Delete-Snapshots.ps1
 Description : Consolidate all snapshots on the VMware platform.
+            : This script unilaterally cleans up ALL snapshots on the
+            : esxi platform.
+            : It will enumerate all virtual machines, loop through them
+            : checking for existence of snapshot and consolidating (deleteing)
+            : all including child snapshots.
+            
+            :  NOTE: This script submits the jobs ASYNCHRONOUSLY to the queue.
+            :  NOTE: Uses the common include file construct.
 
 Usage       : .\Delete-Snapshots.ps1 or Powershell IDE
 Date        : 01/12/2020
