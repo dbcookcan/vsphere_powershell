@@ -26,6 +26,7 @@ v1.02	01/12/2020	dbc	Modified for PowerShell Core 7.
 # Set common vars across Kira instances
 $port="443"
 $OutputBaseDir = "/opt/automate/Reports"
+$BackupBaseDir = "/opt/automate/Backups"
 $filedate = Get-Date -format yyyy.M.d
 $CredDir = "/opt/automate/CredStore/"
 $KeyfileName = "MasterKey.txt"

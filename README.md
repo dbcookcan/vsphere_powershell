@@ -9,6 +9,8 @@ Gen-Masterfile.ps1 - Generate a master key which is a 24-byte salt value for the
 Gen-Passwordfile.ps1 - Generates a user's credential store salted by the MasterFile key.
 
 # Scripts
+Backup-vSPhere-Config.ps1 - Backup ESXi config to local directory and push to AWS S3 bucket.
+
 Delete-Snapshots.ps1 - Unilaterly consolidates (deletes) all snapshots on a VMware esxi platform.
 
 vSphere-Licenses.ps1 - Report detailing all vSphere licenses (vcenter, esxi, vSAN, etc) held within VMware installation.
