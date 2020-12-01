@@ -10,3 +10,5 @@ Gen-Passwordfile.ps1 - Generates a user's credential store salted by the MasterF
 
 # Scripts
 Delete-Snapshots.ps1 - Unilaterly consolidates (deletes) all snapshots on a VMware esxi platform.
+
+vSphere-Licenses.ps1 - Report detailing all vSphere licenses (vcenter, esxi, vSAN, etc) held within VMware installation.
