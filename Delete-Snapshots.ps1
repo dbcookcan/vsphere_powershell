@@ -16,9 +16,6 @@ REQUIRES    : VMware PowerCLI
 $VER=1.01
 $ReportName = "Delete-Snapshots"
 $ScriptName = $MyInvocation.MyCommand.Definition
-IF ($EMAIL -gt 1){ $EMAIL = 1 }
-$emailfrom="davidc@advan.ca"
-$emailto="davidc@advan.ca"
 
 
 #
