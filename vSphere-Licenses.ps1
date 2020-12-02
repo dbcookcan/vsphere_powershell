@@ -34,7 +34,7 @@ $Filespec = $OutputBaseDir + "/" + $ReportName.Replace(" ","_") +"-"+ `
 #
 # Connect to Virtual Center
 $VC = Connect-VIServer -Server $VIServer -Port $port -user $VIUsername `
-          -password $VIpassword -ErrorAction SilentlyContinue
+          -password $VIPassword -ErrorAction SilentlyContinue
 
 #
 # If Connection error, fail
