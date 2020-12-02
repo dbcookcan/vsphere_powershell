@@ -1,5 +1,5 @@
 #!/bin/pwsh
-param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL)
+param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL,[int]$SENDAWS)
 @"
 ===============================================================================
 Title       : Backup-vSPhere-Config.ps1
@@ -52,11 +52,20 @@ AWS Policy  : The AWS IAM user should have a policy attached that severely
             :   ]
             :  }
             :
+
+            : Runing in cron as follows:
+            : # Backup the VMware vSphere configuration @ 1:00 every day
+            : 00 1 * * * /opt/automate/powershell/Prod/Backup-vSphere-Config.ps1 [vcenter FQDN] [admin acct] 0 0 1
+            : NOTE1:  MUST USE FULL PATHNAMES FOR CRON ENVIRONMENT.
+            : NOTE2:  3rd param (0) is DEBUG
+            :         4th param (0) is EMAIL (don't send)
+            :         5th param (1) is SENDAWS (yes, send to AWS S3) 
 ===============================================================================
 History
 Ver     Date            Who     Details
 v1.00   21/02/2016      dbc     Initial delivery
-
+v1.01	03/12/2020	dbc	Add optional params for AWS s3 & fully
+                                qualified binary names for use in crontab.
 ===============================================================================
 "@
 
@@ -64,25 +73,29 @@ v1.00   21/02/2016      dbc     Initial delivery
 $VER=1.01
 $ReportName = "Backup vSphere Configuration"
 $ScriptName = $MyInvocation.MyCommand.Definition
-IF ($EMAIL -gt 1){ $EMAIL = 1 }
+$S3_LOC="s3://dbc-tbucket-2020-01-30/Backups"
+$AWSCLI="/usr/local/bin/aws"
+# Do we send email?
+IF ($EMAIL -gt 1){ $EMAIL = 1 } else { $EEMAIL = 0 }
 $emailfrom="david.cook@kirasystems.com"
 $emailto="david.cook@kirasystems.com"
+# Do we send backups to AWS?
+IF ($SENDAWS -ge 1){ $SENDAWS = 1 } else { $SENDAWS = 0 }
 
 
 #
 # Include Kira common header
-. "./Kira_Include.ps1"
+. "/opt/automate/powershell/Prod/Kira_Include.ps1"
 
 # Set local vars here which are dependant/subordinate to vars or calculations
 # performed in the common header.
 # Backup location underneath $BackupBaseDir from the include file.
 $Backup_Location="/VMware/$filedate/"
-$S3_LOC="s3://dbc-tbucket-2020-01-30/Backups"
 
 #
 # Connect to Virtual Center
 $VC = Connect-VIServer -Server $VIServer -Port $port -user $VIUsername `
-       -password $VIpassword -ErrorAction SilentlyContinue
+       -password $VIPassword -ErrorAction SilentlyContinue
 
 If (!$?) {
 
@@ -139,7 +152,9 @@ If (!$?) {
 
 #
 # Copy Backups to S3 for off-site archive
-iex "aws s3 cp $targetdir $S3_LOC$Backup_Location --recursive"
+if ( $SENDAWS -eq 1 ) {
+   iex "$AWSCLI s3 cp $targetdir $S3_LOC$Backup_Location --recursive"
+} # END SENDAWS
 
 # END OF SCRIPT
 Write-Host "`nEnd of script ...."
