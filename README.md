@@ -13,4 +13,6 @@ Backup-vSPhere-Config.ps1 - Backup ESXi config to local directory and push to AW
 
 Delete-Snapshots.ps1 - Unilaterly consolidates (deletes) all snapshots on a VMware esxi platform.
 
+vSphere-guest-disk-sizes.ps1 - Report VM disk partition sizes, free space and datastore fill percentage.
+
 vSphere-Licenses.ps1 - Report detailing all vSphere licenses (vcenter, esxi, vSAN, etc) held within VMware installation.
