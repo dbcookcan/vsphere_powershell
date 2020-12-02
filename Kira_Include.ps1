@@ -60,13 +60,13 @@ if( [string]::IsNullOrEmpty($VIUsername) ){
     if( $DEBUG -gt 0 ){
        Write-Host "No VIUser on command line, interactive prompting"
     }
-    $VIusername = read-host "$ReportName`n`nUsername for "$VIServer
+    $VIUsername = read-host "$ReportName`n`nUsername for "$VIServer
 } # END: If Username string is empty
 
 
 #
 # Generate Credential Store filename
-$CredFile=$CredDir+$VIServer+"-"+$VIusername+".cred"
+$CredFile=$CredDir+$VIServer+"-"+$VIUsername+".cred"
 if( $DEBUG -gt 0 ){ Write-Host "Credential File: $CredFile" }
 
 
@@ -88,8 +88,8 @@ If (Test-Path $CredFile) {
    # Assign PSCredential object back to local vars because login parameters
    # are different depending on how they were obtained. Local vars becomes
    # lowest-common-denominator
-   $VIsecurepassword=$MyCreds.Password
-   $VIpassword = (New-Object PSCredential "$VIusername",$VIsecurepassword).GetNetworkCredential().Password
+   $VISecurePassword=$MyCreds.Password
+   $VIPassword = (New-Object PSCredential "$VIUsername",$VISecurePassword).GetNetworkCredential().Password
 
    # Clear credential store
    $MyCreds=""
@@ -101,8 +101,8 @@ If (Test-Path $CredFile) {
    if( $DEBUG -gt 0 ){ Write-Host "Credential File does not exist. Prompt user" }
 
    # Get info from user interactively
-   $VIsecurepassword = read-host -assecurestring "$ReportName`n`nPassword"
-   $VIpassword = (New-Object PSCredential "$VIusername",$VIsecurepassword).GetNetworkCredential().Password
+   $VISecurePassword = read-host -assecurestring "$ReportName`n`nPassword"
+   $VIPassword = (New-Object PSCredential "$VIUsername",$VISecurePassword).GetNetworkCredential().Password
 
 } # END: Test Credential file exist
 
