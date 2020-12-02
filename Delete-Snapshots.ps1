@@ -1,4 +1,5 @@
 #!/bin/pwsh
+param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL)
 @"
 ===============================================================================
 Title       : Delete-Snapshots.ps1

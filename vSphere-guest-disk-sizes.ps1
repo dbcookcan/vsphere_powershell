@@ -46,7 +46,7 @@ If (!$?) {
 
   ForEach ($VM in Get-VM | Sort-Object) {
     $VM.Extensiondata.Guest.Disk |`
-    Select @{N="Name         ";E={$VM.Name}},@{N="Disk Path             ";E={$_.DiskPath}},
+    Select @{N="VM Name      ";E={$VM.Name}},@{N="Disk Path             ";E={$_.DiskPath}},
            @{N="Capacity(MB)";E={[math]::Round($_.Capacity/ 1MB)}},
            @{N="Free Space(MB)";E={[math]::Round($_.FreeSpace / 1MB)}},
            @{N="Free Space %";E={[math]::Round(((100* ($_.FreeSpace))/ ($_.Capacity)),0)}} | Format-Table
