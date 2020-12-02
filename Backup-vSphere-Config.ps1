@@ -53,6 +53,11 @@ AWS Policy  : The AWS IAM user should have a policy attached that severely
             :  }
             :
 ===============================================================================
+History
+Ver     Date            Who     Details
+v1.00   21/02/2016      dbc     Initial delivery
+
+===============================================================================
 "@
 
 # Set local vars

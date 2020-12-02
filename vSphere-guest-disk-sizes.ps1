@@ -1,12 +1,18 @@
 #!/bin/pwsh
 param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL)
-# ===========================================================================
-# NAME    : vSPhere-guest-disk-sizes.ps1
-# AUTHOR  : David Cook
-# DATE    : 2013.03.22
-# COMMENT : Login to vSPhere and identify all guest VM disk sizes
-# REQUIRES: VMware PowerCLI
-# ===========================================================================
+@"
+===============================================================================
+NAME    : vSPhere-guest-disk-sizes.ps1
+AUTHOR  : David Cook
+DATE    : 2013.03.22
+COMMENT : Login to vSPhere and identify all guest VM disk sizes
+REQUIRES: VMware PowerCLI
+===============================================================================
+History
+Ver     Date            Who     Details
+v1.00   21/02/2016      dbc     Initial delivery
+===============================================================================
+"@
 #
 #
 # Set local vars

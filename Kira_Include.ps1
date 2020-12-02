@@ -13,7 +13,7 @@ AUTHOR      : David Cook
 REQUIRES    : VMware PowerCLI
 ===============================================================================
 History
-Ver             Date            Who     Details
+Ver     Date            Who     Details
 v1.00   21/03/2019      dbc     Initial delivery
 v1.01   17/04/2019      dbc     Added in-app declarations if not defined
                                 elsewhere.
