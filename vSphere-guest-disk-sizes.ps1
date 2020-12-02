@@ -27,8 +27,8 @@ $ReportName = "vSphere Guest Disk Sizes"
 
 #
 # Connect to Virtual Center
-$VC = Connect-VIServer -Server $VIServer -Port $port -user $VIusername `
-       -password $VIpassword -ErrorAction SilentlyContinue
+$VC = Connect-VIServer -Server $VIServer -Port $port -user $VIUsername `
+       -password $VIPassword -ErrorAction SilentlyContinue
 
 If (!$?) {
 
