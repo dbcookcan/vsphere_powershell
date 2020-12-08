@@ -57,7 +57,6 @@ If (!$?) {
   #
   # Retrieve sorted list of all VMs on the platform
   $VMLIST=get-vm | Sort-Object
-  #| where-object { $_.GuestId -like "centos*" }
 
   #
   # Loop through list
@@ -68,7 +67,7 @@ If (!$?) {
     # If snapshots exist, consolidate them including children.
     If ($snaps){
         Write-Host "Consolidating snapshots for "$VM.Name
-        $snaps | Remove-Snapshot -RemoveChildren -RunAsync -confirm:$false
+        $snaps | Remove-Snapshot -RemoveChildren -confirm:$false
     } # end if snaps
   } # end foreach vm
 
