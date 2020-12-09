@@ -6,13 +6,17 @@ Title       : Snapshot-Create.ps1
 Description : Creates a snapshot of a virtual machine provided on the
             : command line.
 
-            : Takes hostname on cmdline and converts to a hotname. It then
-            : looks for the IP address in the VM cluster to asociate with
-            : a VMware ESXi hostname object that is ued to create the
-            : snapshot.
+            : Creates a VM snapshot of a virtual machine whose IP address
+            : matches the DNS ip provided by [hostname]. Note the difference
+            : here between resolvable DNS hostname and the name given a VM
+            : within the ESXi environment.
 
             : Use this prior to performaing yum updates etc. in order to
             : have a rollback option.
+
+            : Assumptions:
+            : Will scan all available VM interfaces to find a match.
+            : Assumes a unique resolvable IP address per DNS entry. 
 
             : Exit Codes
             : 0 - normal completion
@@ -21,7 +25,7 @@ Description : Creates a snapshot of a virtual machine provided on the
             : 3 - host is not in the vmware cluster
             : 9 - failed vm snapshot completion
 
-Usage       : .\Snapshot-Create.ps1
+Usage       : .\Snapshot-Create.ps1 [vcenter] [VC Acct] [hostname] [DEBUG]
 Date        : 08/12/2020
 AUTHOR      : David Cook
 REQUIRES    : VMware PowerCLI
