@@ -22,8 +22,8 @@ $ReportName = "vSphere License Inventory"
 $ScriptName = $MyInvocation.MyCommand.Definition
 
 #
-# Include Kira common header
-. "./Kira_Include.ps1"
+# Include Advantech common header
+. "./Advan_Include.ps1"
 
 # Define Report (Output) file
 $Filespec = $OutputBaseDir + "/" + $ReportName.Replace(" ","_") +"-"+ `

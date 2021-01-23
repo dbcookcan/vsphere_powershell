@@ -32,8 +32,8 @@ $ScriptName = $MyInvocation.MyCommand.Definition
 
 
 #
-# Include Kira common header
-. "./Kira_Include.ps1"
+# Include Advantech common header
+. "./Advan_Include.ps1"
 
 
 #

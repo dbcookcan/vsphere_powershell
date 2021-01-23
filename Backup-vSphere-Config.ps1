@@ -77,15 +77,15 @@ $S3_LOC="s3://dbc-tbucket-2020-01-30/Backups"
 $AWSCLI="/usr/local/bin/aws"
 # Do we send email?
 IF ($EMAIL -gt 1){ $EMAIL = 1 } else { $EEMAIL = 0 }
-$emailfrom="david.cook@kirasystems.com"
-$emailto="david.cook@kirasystems.com"
+$emailfrom="admin@advan.ca"
+$emailto="admin@advan.ca"
 # Do we send backups to AWS?
 IF ($SENDAWS -ge 1){ $SENDAWS = 1 } else { $SENDAWS = 0 }
 
 
 #
-# Include Kira common header
-. "/opt/automate/powershell/Prod/Kira_Include.ps1"
+# Include Advantech common header
+. "/opt/automate/powershell/Prod/Advan_Include.ps1"
 
 # Set local vars here which are dependant/subordinate to vars or calculations
 # performed in the common header.

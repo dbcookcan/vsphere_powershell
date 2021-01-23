@@ -45,8 +45,8 @@ $ScriptName = $MyInvocation.MyCommand.Definition
 
 
 #
-# Include Kira common header
-. "/opt/automate/powershell/Prod/Kira_Include.ps1"
+# Include Advantch common header
+. "/opt/automate/powershell/Prod/Advan_Include.ps1"
 
 
 

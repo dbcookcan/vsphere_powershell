@@ -1,13 +1,13 @@
 @"
 ===============================================================================
-Title       : Kira_Header.ps1
-Description : Standard Header for Kira Systems PowerShell
+Title       : Advan_Include.ps1
+Description : Standard Advantech header file for Powershell.
             :
             : Called as a "sourced" file at the top to provide features
             : from a common library.
 
 Usage       : To be included in other scripts with:
-                        . "./Kira_Include.ps1"
+                        . "./Advan_Include.ps1"
 Date        : 21/03/2019
 AUTHOR      : David Cook
 REQUIRES    : VMware PowerCLI
@@ -23,7 +23,7 @@ v1.02	01/12/2020	dbc	Modified for PowerShell Core 7.
 "@
 
 #
-# Set common vars across Kira instances
+# Set common vars across all instances
 $port="443"
 $OutputBaseDir = "/opt/automate/Reports"
 $BackupBaseDir = "/opt/automate/Backups"
