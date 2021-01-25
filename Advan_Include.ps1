@@ -28,15 +28,63 @@ $port="443"
 $OutputBaseDir = "/opt/automate/Reports"
 $BackupBaseDir = "/opt/automate/Backups"
 $filedate = Get-Date -format yyyy.M.d
-$CredDir = "/opt/automate/CredStore/"
+$SharedCredDir = "/usr/.CredStore/"
+$CredDir = "$HOME/.CredStore/"
 $KeyfileName = "MasterKey.txt"
-$KeyFile = $CredDir+$KeyfileName
+$KeyFile = $SharedCredDir+$KeyfileName
 $tab=[char]9
+$MyName = $MyInvocation.MyCommand.Definition
 
 # Set typical vars used within applications if they have not previously been
 # declared elsewhere
 If (!$DEBUG) { $DEBUG=0 }
 If (!$ERRTOT) { $ERRTOT=0 }
+
+#
+# Check existence & permissions on the shared credential store & include
+# library locations
+If (Test-Path $SharedCredDir){
+   $perms=stat -c '%a' $SharedCredDir
+   If ($perms -ne 555){
+      Write-Host "Must have 555 permissions on $SharedCredDir. Exiting..."
+      exit 9
+   }
+}Else{
+   Write-Host "Credstore $SharedCredStore does not exist."
+   exit 9
+}
+
+
+#
+# Now check the user local credential store and create it if missing.
+# library locations
+If (Test-Path $CredDir){
+   $perms=stat -c '%a' $CredDir
+   If ($perms -ne 700){
+      Write-Host "Must have 700 permissions on $CredDir. Exiting..."
+      exit 9
+   }
+}Else{
+   Write-Host "Local store: $CredDir"
+   mkdir $CredDir
+   chmod 0700 $CredDir
+}
+
+# Check the permissions on the Master file.
+$perms=stat -c '%a' $KeyFile
+If ($perms -ne 644){
+   Write-Host "$KeyFile permissions not 644. Exiting...."
+   exit 9
+}
+
+# Finally, check the permissions on this file are tight enough to prevent
+# modifications by users to alter this security check.
+If( $DEBUG -gt 0 ){ Write-Host "Include file: $MyName" }
+$perms=stat -c '%a' $MyName
+If ($perms -ne 644){
+   Write-Host "$MyName permissions not 644. Exiting...."
+   exit 9
+}
 
 
 #
@@ -44,20 +92,20 @@ If (!$ERRTOT) { $ERRTOT=0 }
 # key that was generated with the gen-keyfile.ps1 program. It forms the salt
 # for all encryption of credential stores.
 $key=Get-Content -Path $KeyFile
-if( $DEBUG -gt 0 ){ Write-Host "Key: $key" }
+If( $DEBUG -gt 0 ){ Write-Host "Key: $key" }
 
 #
 # If no command line parms were provided we will interactively get the
 # credential
 # information the user.
-if( [string]::IsNullOrEmpty($VIServer) ){
-    if( $DEBUG -gt 0 ){ 
+If( [string]::IsNullOrEmpty($VIServer) ){
+    If( $DEBUG -gt 0 ){ 
       Write-Host "No VIServer on command line, interactive prompting"
     }
     $VIServer = read-host "$ReportName`n`nVirtualCenter or ESXI Host Name"
 } # END If Server string empty
-if( [string]::IsNullOrEmpty($VIUsername) ){
-    if( $DEBUG -gt 0 ){
+If( [string]::IsNullOrEmpty($VIUsername) ){
+    If( $DEBUG -gt 0 ){
        Write-Host "No VIUser on command line, interactive prompting"
     }
     $VIUsername = read-host "$ReportName`n`nUsername for "$VIServer
@@ -67,7 +115,7 @@ if( [string]::IsNullOrEmpty($VIUsername) ){
 #
 # Generate Credential Store filename
 $CredFile=$CredDir+$VIServer+"-"+$VIUsername+".cred"
-if( $DEBUG -gt 0 ){ Write-Host "Credential File: $CredFile" }
+If( $DEBUG -gt 0 ){ Write-Host "Credential File: $CredFile" }
 
 
 #
@@ -77,6 +125,14 @@ if( $DEBUG -gt 0 ){ Write-Host "Credential File: $CredFile" }
 If (Test-Path $CredFile) {
    # Credential File exists
    # Read them back
+
+   #
+   # Check to ensure file permissions are not too open.
+   $perms=stat -c '%a' $CredFile
+   If ($perms -ne 660){
+      Write-Host "Must have 660 permissions on $SharedCredDir. Exiting..."
+      exit 9
+   }
 
    #
    # Retrieve encrypted credential and store as PSCredential object
@@ -94,11 +150,11 @@ If (Test-Path $CredFile) {
    # Clear credential store
    $MyCreds=""
 
-} else {
+} Else {
 
    #
    # No credential file, have to get info from user
-   if( $DEBUG -gt 0 ){ Write-Host "Credential File does not exist. Prompt user" }
+   If( $DEBUG -gt 0 ){ Write-Host "Credential File does not exist. Prompt user" }
 
    # Get info from user interactively
    $VISecurePassword = read-host -assecurestring "$ReportName`n`nPassword"

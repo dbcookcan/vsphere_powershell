@@ -22,7 +22,7 @@ $ReportName = "vSphere Guest Disk Sizes"
 
 #
 # Include Advantech common header
-. "./Advan_Include.ps1"
+. "/usr/.CredStore/Advan_Include.ps1"
 
 
 #

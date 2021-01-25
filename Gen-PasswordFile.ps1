@@ -27,7 +27,7 @@ v1.00   03/21/2019      dbc     Initial delivery
 #
 # Set vars/defaults
 $ReportName = "Generate New Keyfile"
-$CredDir = "/opt/automate/CredStore/"
+$CredDir = "$HOME/.CredStore/"
 $KeyFileName = "MasterKey.txt"
 $KeyFile = $CredDir+$KeyFileName
 $DEBUG=0

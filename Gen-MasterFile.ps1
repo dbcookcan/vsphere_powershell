@@ -21,20 +21,12 @@ v1.00   03/21/2019      dbc     Initial delivery
 #
 # Set vars/defaults
 $ReportName = "Generate New Keyfile"
-$CredDir = "/opt/automate/CredStore/"
+$CredDir = "/opt/automate/.CredStore/"
 $Keyfile = "MasterKey.txt"
 $KeyFile = $CredDir+$Keyfile
 
 #
 # Generate 192 bit key
-#$key='('
-#for($i=0; $i -lt 24; $i++)
-#{
-#  $tkey += (Get-Random -Minimum 0 -Maximum 254)
-#  if( $i -lt 23 ) { $tkey += "," } else { $tkey += ")" }
-#}
-
-#
 # Create list of 24 random numbers to be used as the salt value for encrypting
 # keyfile for vcenter automations.
 $key = New-Object Byte[] 24
@@ -49,6 +41,7 @@ for($i=0; $i -lt 24; $i++)
 Set-Content -Path $KeyFile -Value $key
 Write-Host "Keyfile: $KeyFile"
 
+Write-Host "This file ($KeyFile) must be moved by root user to /usr/.CredStore"
 
 # END OF SCRIPT
 

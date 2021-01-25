@@ -85,7 +85,7 @@ IF ($SENDAWS -ge 1){ $SENDAWS = 1 } else { $SENDAWS = 0 }
 
 #
 # Include Advantech common header
-. "/opt/automate/powershell/Prod/Advan_Include.ps1"
+. "/usr/.CredStore/Advan_Include.ps1"
 
 # Set local vars here which are dependant/subordinate to vars or calculations
 # performed in the common header.

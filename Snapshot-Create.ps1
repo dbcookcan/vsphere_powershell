@@ -46,7 +46,7 @@ $ScriptName = $MyInvocation.MyCommand.Definition
 
 #
 # Include Advantch common header
-. "/opt/automate/powershell/Prod/Advan_Include.ps1"
+. "/usr/.CredStore/Advan_Include.ps1"
 
 
 
@@ -57,7 +57,7 @@ if ( $myhost -eq "" ){
 }
 
 
-# Retreive DNS entry to get IP address
+# Retrieve DNS entry to get IP address
 $hostip=getent hosts $myhost | awk '{print $1}'
 if ( $hostip -eq $NULL ){
    Write-Host "Failed to get a DNS result for host $myhost."
@@ -100,7 +100,7 @@ If (!$?) {
   # Check if we found the VM
   if ( $myvm -eq $NULL ){
      # If null, we failed to find the VM in this cluster.
-     # Either this machine exists in a different EXi cluster or the machine
+     # Either this machine exists in a different ESSXi cluster or the machine
      # in question is not a VM.
      Write-Host "Host $myhost is not a VM in this cluster."
      exit 3
@@ -115,7 +115,7 @@ If (!$?) {
              -runasync:$false
  
   if ( $newsnap -eq $NULL ){
-     # we failed to create snapshot
+     # We failed to create snapshot
      exit 9
   }
 
