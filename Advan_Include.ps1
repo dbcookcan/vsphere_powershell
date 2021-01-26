@@ -41,6 +41,12 @@ If (!$DEBUG) { $DEBUG=0 }
 If (!$ERRTOT) { $ERRTOT=0 }
 
 #
+# Common functions
+function Do-Disconnect {
+  Disconnect-VIServer -Confirm:$False
+}
+
+#
 # Check existence & permissions on the shared credential store & include
 # library locations
 If (Test-Path $SharedCredDir){
