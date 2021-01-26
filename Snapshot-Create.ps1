@@ -53,6 +53,7 @@ $ScriptName = $MyInvocation.MyCommand.Definition
 # Check that we received a hostname
 if ( $myhost -eq "" ){
    Write-Host "No hostname provided."
+   Do-Disconnect
    exit 1
 }
 
@@ -61,6 +62,7 @@ if ( $myhost -eq "" ){
 $hostip=getent hosts $myhost | awk '{print $1}'
 if ( $hostip -eq $NULL ){
    Write-Host "Failed to get a DNS result for host $myhost."
+   Do-Disconnect
    exit 2
 }
 
@@ -103,6 +105,7 @@ If (!$?) {
      # Either this machine exists in a different ESSXi cluster or the machine
      # in question is not a VM.
      Write-Host "Host $myhost is not a VM in this cluster."
+     Do-Disconnect
      exit 3
   }
 
@@ -116,8 +119,13 @@ If (!$?) {
  
   if ( $newsnap -eq $NULL ){
      # We failed to create snapshot
+     Do-Disconnect
      exit 9
   }
+
+  #
+  # Disconnect from Virtualcenter
+  Do-Disconnect
 
 }
 

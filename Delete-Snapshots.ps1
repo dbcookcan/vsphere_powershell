@@ -73,7 +73,7 @@ If (!$?) {
 
   #
   # Disconnect from Virtualcenter
-  Disconnect-Viserver -Confirm:$false
+  Do-Disconnect
 
 } # end if connect
 

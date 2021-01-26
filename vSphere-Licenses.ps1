@@ -85,7 +85,7 @@ If (!$?) {
 
   #
   # Disconnect from Virtualcenter
-  Disconnect-VIServer -Confirm:$False
+  Do-Disconnect
 
 
   #
