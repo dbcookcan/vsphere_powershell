@@ -11,7 +11,19 @@ Gen-Passwordfile.ps1 - Generates a user's credential store salted by the MasterF
 # Scripts
 Backup-vSPhere-Config.ps1 - Backup ESXi config to local directory and push to AWS S3 bucket.
 
-Delete-Snapshots.ps1 - Unilaterly consolidates (deletes) all snapshots on a VMware esxi platform.
+FindIP_ps1 - Search environment for the machine owning a specific IP.
+
+Find_MAC.ps1 - Search environment for the machine owning a sspecific MAC address.
+
+List_VM_Datastores - List all machines and associated datastores.
+
+Manage_PG.ps1 - Build/ensure all hosts have the predefined Port Groups in the standard switches.
+
+Snapshot-Create.ps1 - Create snapshots of FQDN provided. Matches FQDN to vSphere name and creates snapshot.
+
+Snapshot-Deletes.ps1 - Unilaterly consolidates (deletes) all snapshots on a VMware esxi platform.
+
+TPS_turn_on.ps1 - Turn on host flag & turn on vm flags if necessary to enable Transparent Page Sharing.
 
 vSphere-guest-disk-sizes.ps1 - Report VM disk partition sizes, free space and datastore fill percentage.
 

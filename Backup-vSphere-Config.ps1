@@ -76,7 +76,7 @@ $ScriptName = $MyInvocation.MyCommand.Definition
 $S3_LOC="s3://dbc-tbucket-2020-01-30/Backups"
 $AWSCLI="/usr/local/bin/aws"
 # Do we send email?
-IF ($EMAIL -gt 1){ $EMAIL = 1 } else { $EEMAIL = 0 }
+IF ($EMAIL -gt 1){ $EMAIL = 1 } else { $EMAIL = 0 }
 $emailfrom="admin@advan.ca"
 $emailto="admin@advan.ca"
 # Do we send backups to AWS?

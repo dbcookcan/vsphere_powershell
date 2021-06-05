@@ -1,0 +1,61 @@
+#!/bin/pwsh
+param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL)
+@"
+===============================================================================
+Title       : List_VM_Datastores
+Description : List the VMs in the environment with their attached
+            : datastores.
+
+Usage       : .\List_VM_Datastores or Powershell IDE
+Date        : 03/05/2021
+AUTHOR      : David Cook
+REQUIRES    : VMware PowerCLI
+HISTORY     : v1.0 03/05/2021 Initial deliverry
+===============================================================================
+"@
+
+#
+# Set local vars
+$VER=1.0
+$ReportName = "List VM Datastores"
+$ScriptName = $MyInvocation.MyCommand.Definition
+IF ($EMAIL -gt 1){ $EMAIL = 1 }
+$emailfrom="david.cook@kirasystems.com"
+$emailto="david.cook@kirasystems.com"
+
+
+
+#
+# Include Advantech common header
+. "/usr/.CredStore/Advan_Include.ps1"
+
+
+#
+# Connect to Virtual Center
+$VC = Connect-VIServer -Server $VIServer -Port $port -user $VIusername -password $VIpassword -ErrorAction SilentlyContinue
+
+If (!$?) {
+
+  #
+  # Error - failed to connect to the virtual center server
+  Write-Host "ERROR: Failed to connect to Virtual Center: $VCHostName"
+
+} Else {
+
+  #
+  # Successful login to Virtualcenter
+
+  Get-VM | Select Name, `
+  @{N="Datastore";E={[string]::Join(',',(Get-Datastore -Id $_.DatastoreIdList | Select -ExpandProperty Name))}}, `
+  @{N="Folder";E={$_.Folder.Name}}
+
+
+  #
+  # Disconnect from Virtualcenter
+  Disconnect-VIServer -Confirm:$False
+}
+
+Write-Host "`nEnd of script ...."
+# END OF SCRIPT
+
+
