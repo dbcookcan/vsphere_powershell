@@ -25,8 +25,8 @@ v1.02	01/12/2020	dbc	Modified for PowerShell Core 7.
 #
 # Set common vars across all instances
 $port="443"
-$OutputBaseDir = "/opt/automate/Reports"
-$BackupBaseDir = "/opt/automate/Backups"
+$OutputBaseDir = "/nfshome/automate/Reports"
+$BackupBaseDir = "/nfshome/automate/Backups"
 $filedate = Get-Date -format yyyy.M.d
 $SharedCredDir = "/usr/.CredStore/"
 $CredDir = "$HOME/.CredStore/"

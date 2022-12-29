@@ -1,4 +1,4 @@
-#!/bin/pwsh
+#!/usr/bin/env pwsh
 param([string]$VIServer="",[string]$VIUsername="",[string]$FindIP="",[int]$DEBUG,[int]$EMAIL)
 @"
 ===============================================================================

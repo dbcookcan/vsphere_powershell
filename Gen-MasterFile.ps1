@@ -7,6 +7,9 @@ Description : Generate a master key for encryption of passwords. To be used
             : recreate new passwords based on the key.
             : Finally, change the passwords in vcenter or your ldap server.
 
+            : Note: MasterKey file goes in /usr/.CredStore
+	    :       User passwords go in $HOME/.CredStore
+
 Usage       : pwsh gen-keyfile.ps1
 Date        : 03/21/2019
 AUTHOR      : David Cook
@@ -21,7 +24,7 @@ v1.00   03/21/2019      dbc     Initial delivery
 #
 # Set vars/defaults
 $ReportName = "Generate New Keyfile"
-$CredDir = "/opt/automate/.CredStore/"
+$CredDir = "$HOME/.CredStore/"
 $Keyfile = "MasterKey.txt"
 $KeyFile = $CredDir+$Keyfile
 

@@ -1,4 +1,4 @@
-#!/bin/pwsh
+#!/bin/env pwsh
 param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG)
 @"
 ===============================================================================

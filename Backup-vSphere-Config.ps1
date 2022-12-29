@@ -55,7 +55,7 @@ AWS Policy  : The AWS IAM user should have a policy attached that severely
 
             : Runing in cron as follows:
             : # Backup the VMware vSphere configuration @ 1:00 every day
-            : 00 1 * * * /opt/automate/powershell/Prod/Backup-vSphere-Config.ps1 [vcenter FQDN] [admin acct] 0 0 1
+            : 00 1 * * * /nfshome/automate/powershell/Prod/Backup-vSphere-Config.ps1 [vcenter FQDN] [admin acct] 0 0 1
             : NOTE1:  MUST USE FULL PATHNAMES FOR CRON ENVIRONMENT.
             : NOTE2:  3rd param (0) is DEBUG
             :         4th param (0) is EMAIL (don't send)
@@ -111,6 +111,9 @@ If (!$?) {
 
   # Build the target directory path and check if it exists. If not,
   # create it.
+Write-Host "BackupBaseDir:  $BackupBaseDir"
+Write-Host "BackupLocation: $Backup_Location"
+
   $targetdir = $BackupBaseDir+$Backup_Location
   If ((Test-Path -PathType Container -Path $targetdir) -eq $false){
      # Create the directory that doesn't exist
@@ -159,4 +162,7 @@ if ( $SENDAWS -eq 1 ) {
 # END OF SCRIPT
 Write-Host "`nEnd of script ...."
 
-# END OF SCRIPTS
+#
+# EOF
+#
+

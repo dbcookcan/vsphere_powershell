@@ -1,4 +1,4 @@
-#!/bin/pwsh
+#!/usr/bin/env pwsh
 param([string]$VIServer="",[string]$VIUsername="",[int]$DEBUG,[int]$EMAIL)
 @"
 ===============================================================================
@@ -20,8 +20,8 @@ $VER=1.0
 $ReportName = "List VM Datastores"
 $ScriptName = $MyInvocation.MyCommand.Definition
 IF ($EMAIL -gt 1){ $EMAIL = 1 }
-$emailfrom="david.cook@kirasystems.com"
-$emailto="david.cook@kirasystems.com"
+$emailfrom="myemail@example.com"
+$emailto="myemail@example.com"
 
 
 

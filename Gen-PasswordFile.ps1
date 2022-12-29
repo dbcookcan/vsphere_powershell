@@ -6,12 +6,15 @@ Description : Generate an encrypted password for a user based on the master
             : key value and the text password from authentication source which
             : will be used for the platform.
 
-            : WHEN YOU WANT TO CHANGE PASSWORDS
+            : WHEN YOU WANT TO CHANGE YOUR PASSWORD
             : 1. Change the password on your authenticator as normal.
-            : 2. Run Gen-Masterfile.ps1 to create a new encryption keyfile which
-            :    acts as the salt for the encryption.
-            : 3. Run Gen-Password.ps1 to generate a new PowerShell Credential
+            : 2. Run Gen-Password.ps1 to generate a new PowerShell Credential
             :    Store file to authenticate ids used for automation scripts.
+
+            : WHEN YOU WANT TO CHANGE ALL PASSWORDS
+            : 1. Run Gen-Masterfile.ps1 to create a new encryption keyfile which
+            :    acts as the salt for the encryption.
+	    : 2. Follow prior steps for changing your password.
 
 Usage       : pwsh Gen-Password.ps1
 Date        : 03/21/2019
